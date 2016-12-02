@@ -4,8 +4,12 @@
 <h2>Hello World!</h2>
 <%
    Date date = new Date();
-   out.print( "<h2 align=\"center\">" +date.toString()+"</h2>");
-   out.println("<h3 align=\"center\">"+request.getRemoteAddr()+"</h2>");
+   out.println( "<h2 align=\"center\">" +date.toString()+"</h2>");
+   String ipAddress = request.getHeader("X-FORWARDED-FOR");
+	if (ipAddress == null) {
+		   ipAddress = request.getRemoteAddr();
+	}
+   out.println("<h3 align=\"center\">"+ipAddress+"</h2>");
 %>
 </body>
 </html>
